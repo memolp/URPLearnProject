@@ -40,9 +40,10 @@
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-                float3 normal: TEXCOORD1;
+               // float3 normal: TEXCOORD1;
+                //float fresnel: TEXCOORD2;
                 float4 vertex : SV_POSITION;
-                float4 vertexWorld: TEXCOORD2;
+               // float4 vertexWorld: TEXCOORD2;
             };
 
             sampler2D _MainTex;
@@ -54,31 +55,34 @@
             v2f vert (appdata v)
             {
                 v2f o;
+                
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                o.normal = normalize(mul(unity_ObjectToWorld, float4(v.normal, 0)).xyz);
-                o.vertexWorld = mul(unity_ObjectToWorld, v.vertex);
+                //o.normal = normalize(mul(unity_ObjectToWorld, float4(v.normal, 0)).xyz);
+                //o.vertexWorld = mul(unity_ObjectToWorld, v.vertex);
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float3 worldViewDir = normalize(_WorldSpaceCameraPos.xyz - i.vertexWorld.xyz);
-                half NdotV = max(0, dot(i.normal, worldViewDir));
-                NdotV = 1.0 - NdotV;
-                float fresnel = pow(NdotV, _InSideRimPower) * _InSideRimForce;
-                float3 Emissive = _InSideRimColor.rgb * fresnel;
+                //float3 worldViewDir = normalize(_WorldSpaceCameraPos.xyz - i.vertexWorld.xyz);
+               // half NdotV = max(0, dot(i.normal, worldViewDir));
+               // NdotV = 1.0 - NdotV;
+              //  float fresnel = pow(NdotV, _InSideRimPower) * _InSideRimForce;
+              //  float3 Emissive = _InSideRimColor.rgb * fresnel;
+              //  fixed4 col = tex2D(_MainTex, i.uv);
+              //  return col + float4(Emissive, 1);
                 fixed4 col = tex2D(_MainTex, i.uv);
-                return col + float4(Emissive, 1);
+                return col;
             }
             ENDCG
         }
 
-        /*Pass
+        Pass
         {
             Tags { "LightMode" = "UniversalForward"}
             Cull Front
-            Blend SrcAlpha OneMinusSrcAlpha
+           // Blend SrcAlpha OneMinusSrcAlpha
 
             CGPROGRAM
             #pragma vertex vert
@@ -110,8 +114,10 @@
             v2f vert (appdata v)
             {
                 v2f o;
-                v.vertex.xyz += v.normal * _OutSideRimDistance;
+                // 放大模型-基于法线方向
+                v.vertex.xyz += normalize(v.normal) * _OutSideRimDistance;
                 o.vertex = UnityObjectToClipPos(v.vertex);
+                // 转换到世界坐标
                 o.normal = normalize(mul(unity_ObjectToWorld, float4(v.normal, 0)).xyz);
                 o.vertexWorld = mul(unity_ObjectToWorld, v.vertex);
                 o.uv = v.uv;
@@ -120,12 +126,14 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
+                // 从摄像机指向模型点的向量
                 float3 worldViewDir = normalize(i.vertexWorld.xyz - _WorldSpaceCameraPos.xyz);
+                // 发线与这个向量点乘，1表示同向， 0表示垂直， -1表示反向
                 half NdotV = dot(i.normal, worldViewDir);
                 float fresnel = pow(saturate(NdotV), _OutSideRimPower) * _OutSideRimForce;
-                return float4(_OutSideRimColor.rgb, fresnel);
+                return fixed4(_OutSideRimColor.rgb , fresnel);
             }
             ENDCG
-        }*/
+        }
     }
 }
