@@ -174,7 +174,7 @@
                 o.pos=UnityObjectToClipPos(v.vertex);
                 o.uv=TRANSFORM_TEX(v.uv,_MainTex);
                 o.worldNormal=mul(v.normal,(float3x3)unity_WorldToObject);
-                o.worldPos=mul(unity_ObjectToWorld,v.vertex);
+                o.worldPos= mul(unity_ObjectToWorld,v.vertex);
                 TRANSFER_SHADOW(o);
 
                 return o;
