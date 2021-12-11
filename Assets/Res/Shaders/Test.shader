@@ -2,7 +2,9 @@
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _WaterNormal ("Texture", 2D) = "white" {}
+        _NormalScale ("Normal Scale", float) = 1
+
     }
     SubShader
     {
@@ -23,6 +25,8 @@
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+                float4 tangent: TANGENT;
+                float3 normal: NORMAL;
             };
 
             struct v2f
@@ -30,52 +34,65 @@
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
+                float3 lightDir:TEXCOORD2;
+                float3 viewDir:TEXCOORD3;
+                float4 screenPos:TEXCOORD4;
             };
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
+            sampler2D _WaterNormal;
+            float4 _WaterNormal_ST;
+            float _NormalScale;
+            sampler2D _CameraDepthTexture;
+            float _WaterDepth;
+            float _WaterFallOff;
+            float4 _DeepColor;
+            float4 _ShadowColor;
+            float4 _Specular;
+            float _Gloss;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                fixed3 worldVertex = normalize(mul(unity_WorldToObject, v.vertex));
-                // 获取环境光
-                fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;
-                // 世界空间的法线
-                fixed3 worldNoraml = normalize(mul(v.normal, (float3x3)unity_WorldToObject));
-                // 世界空间的光 - 这里是从顶点到光源方向的向量
-                fixed3 worldLight = normalize(_WorldSpaceLightPos0.xyz);
-                // 法线和灯光同方向为1，相互垂直为0，相反则为-1. 或者是光和法线的夹角，小于90度为正数，大于90度为负数。
-                float NdotL = dot(worldNoraml, worldLight);
-                fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * saturate(NdotL);
-                // 计算光基于法线的反射光，注意光取负，变成从光源到顶点的方向，这样是正常的算反射。
-                fixed3 reflectDir = normalize(reflect(-worldLight, worldNoraml))
-                // 从顶点到摄像机方向的向量，也就是指向眼睛看的向量。
-                fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz) - worldVertex;
-                // 反射的光线如果和执行摄像机的向量夹角越小，说明反射到了眼睛可见。
-                float RDotV = dot(reflectDir, viewDir);
-                // 通过pow，光泽度来强化发射效果
-                fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(saturate(RDotV), _Gloss);
-                o.color = ambient + diffuse + specular;
-
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.uv = TRANSFORM_TEX(v.uv, _WaterNormal); // 一张水面法线图
+                // 模型顶点在屏幕中的坐标（是齐次坐标）
+                o.screenPos = ComputeScreenPos(o.vertex);
+                // 创建世界坐标到切线空间的转换矩阵rotation
+                TANGENT_SPACE_ROTATION;
+                // 将光从模型空间转换到切线空间
+                o.lightDir = normalize(mul(rotation, ObjSpaceLightDir(v.vertex)).xyz); //ObjSpaceLightDir 是转模型空间
+                // 将模型顶点到摄像机方向 转换到 切线空间
+                o.viewDir = normal(mul(rotation, ObjSpaceViewDir(v.vertex)).xyz);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-               // 获取环境光
-                fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;
-                // 世界空间的法线 - 这个可以在顶点中计算
-                fixed3 worldNoraml = normalize(mul(i.normal, (float3x3)unity_WorldToObject));
-                // 世界空间的光 - 这里是从顶点到光源方向的向量
-                fixed3 worldLight = normalize(_WorldSpaceLightPos0.xyz);
-                // 法线和灯光同方向为1，相互垂直为0，相反则为-1. 或者是光和法线的夹角，小于90度为正数，大于90度为负数。
-                float NdotL = dot(worldNoraml, worldLight);
-                fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * saturate(NdotL);
-                return fixed4(ambient + diffuse, 1.0);
+                // 扰动采样UV
+                float2 uv1 = _Time.y * float2(-0.03, 0) + i.uv;
+                float2 uv2 = _Time.y * float2(0.04, 0.04) + i.uv;
+                // 采样水面法线贴图，并进行凹凸缩放
+                float3 noraml_1 = UnpackScaleNormal(tex2d(_WaterNormal, uv1), _NormalScale);
+                float3 noraml_2 = UnpackScaleNormal(tex2d(_WaterNormal, uv2), _NormalScale);
+                // 将两次的法线进行混合
+                half3 blend_normal = BlendNormals(noraml_1, noraml_2);
+
+                // 提取深度值 - 非线性
+                float depth = SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos)).r;
+                depth = LinearEyeDepth(depth); // 视野线性深度值
+                float depthGrap = saturate(depth - i.screenPos.w);
+                // 这样转换后获得深度插值 - 这里会反过来，越小表示深度越深。
+                float depthFade = saturate(pow(depthGrap + _WaterDepth), _WaterFallOff);
+                // 深度越小的地方用_DeepColor，越大的地方用_ShadiwColor;
+                fixed4 color = lerp(_DeepColor, _ShadowColor, depthFade);
+
+                // 计算光照 
+                fixed3 diffuse = _LightColor0.rgb * color * ( 1 + dot(blend_normal, i.lightDir));
+                float3 halfDir = normalize(i.lightDir + i.viewDir);
+                fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(saturate(dot(blend_normal, halfDir)), _Gloss);
+
+                return fixed4(diffuse + specular, 1.0);
             }
             ENDCG
         }
