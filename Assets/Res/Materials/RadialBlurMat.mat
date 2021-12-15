@@ -49,13 +49,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
-    - _Blend: 1.5
+    - _Blend: 1.22
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _Force: 1
+    - _Force: 0.928
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
