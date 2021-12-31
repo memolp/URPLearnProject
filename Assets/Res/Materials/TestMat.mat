@@ -32,6 +32,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BackTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: bd264f023cbee12438a9a7e7bed3466c, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -100,12 +104,14 @@ Material:
     - _AlphaRX: 2.26
     - _AlphaTY: 0.85
     - _Blend: 0
+    - _Blue: -0.013
     - _BlurDistance: 0.6
     - _BumpScale: 1
     - _ColorMask: 20
     - _ColorScatterStrength: 0.079
     - _Cull: 2
     - _Cutoff: 0.5
+    - _Cyan: 0.4
     - _Density: 21
     - _DepthVisibility: 1
     - _DistortionAmplitude: 0.171
@@ -125,6 +131,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _Green: 1
     - _HeartSize: 1
     - _InnerRadius: 0.164
     - _Length: 2
@@ -133,20 +140,25 @@ Material:
     - _LtInnerStrength: 5.56
     - _LtOuterStrength: 2.46
     - _LtSoft: 3.59
+    - _Magenta: 0.325
     - _Metallic: 0
     - _MoreRainAmount: 1
     - _NoiseAnmSpeed: 0.01
     - _NoiseStrength: 0.17
     - _NormalScale: 1
     - _OcclusionStrength: 0.383
+    - _Orange: -0.5
     - _OuterRadius: 0.5
+    - _Pow_S: 1.23
     - _PrimaryShift: 0
     - _Progress: 0.895
+    - _Purple: 0.5
     - _QueueOffset: 0
     - _RadiusX: 1
     - _RadiusY: 0
     - _RandomDirection: 0
     - _ReceiveShadows: 1
+    - _Red: -1
     - _RimIntensity: 1.38
     - _SampleGI: 0
     - _SecondaryShift: 0.4
@@ -169,10 +181,12 @@ Material:
     - _StencilReadMask: 255
     - _StencilWriteMask: 128
     - _Surface: 0
-    - _Value: 6
+    - _Transparent: 1
+    - _Value: 1
     - _VerticalBillBoard: 1
     - _WaveScale: 0.23
     - _WorkflowMode: 1
+    - _Yellow: -0.5
     - _ZWrite: 1
     - _specPower: 0.6
     m_Colors:

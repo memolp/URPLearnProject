@@ -163,7 +163,7 @@
                         int idx = q * COLOR_SAVE_NUM;
                         q_count[idx] += 1;
                         //fixed t = ;
-                        q_count_col[idx] = col * (idx );
+                        q_count_col[idx] = col * idx * 1.0 / COLOR_SAVE_NUM;
                         //out_col += col;
                     }
                 }
