@@ -4,7 +4,9 @@
     {
         _MainTex ("Texture", 2D) = "white" {}
         _BackTex ("Texture", 2D) = "white" {}
+        _Radius ("Radius", Range(1, 2000)) = 2
         _Transparent ("Transparent", Range(0,1)) = 0.5
+        _Color  ("Color", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -39,6 +41,8 @@
             float2 _MainTex_TexelSize;
             float _Transparent;
             sampler2D _BackTex;
+            float _Radius;
+            fixed4 _Color;
 
             v2f vert (appdata v)
             {
@@ -140,46 +144,50 @@
                 return normalize(color);
             }
 
-            #define COLOR_SAVE_NUM 2
+            fixed4 laplace_sharp(fixed2 uv)
+            {
+                /*
+                -1 -1 -1
+                -1 8 -1
+                -1 -1 -1
+                */
+                float2 texelSize = _MainTex_TexelSize;
+                fixed4 color = fixed4(0,0,0,0);
+                color += tex2D(_MainTex, uv + float2(-texelSize.x, -texelSize.y)) * -1;
+				color += tex2D(_MainTex, uv + float2(-texelSize.x,            0)) * -1;
+				color += tex2D(_MainTex, uv + float2(-texelSize.x,  texelSize.y)) * -1;
+
+                color += tex2D(_MainTex, uv + float2(           0, -texelSize.y)) * -1;
+				color += tex2D(_MainTex, uv + float2(           0,            0)) * 8;
+				color += tex2D(_MainTex, uv + float2(           0,  texelSize.y)) * -1;
+
+                color += tex2D(_MainTex, uv + float2( texelSize.x, -texelSize.y)) * -1;
+				color += tex2D(_MainTex, uv + float2( texelSize.x,            0)) * -1;
+				color += tex2D(_MainTex, uv + float2( texelSize.x,  texelSize.y)) * -1;
+
+                return color;
+
+            }
+
+            float rand(fixed2 co)
+            {
+                return frac(sin(dot(co.xy, fixed2(12.9898,78.233)))*43758.5453);
+                //return abs( frac( sin(co.x * 95325.328 + co.y * -48674.077) + cos(co.x * -46738.322 + co.y * 76485.077)) -.5)+.5;
+            }
+
+            #define COLOR_SAVE_NUM 5
             fixed4 frag (v2f i) : SV_Target
             {
-                int radian_ = 2;
-                int q_count[COLOR_SAVE_NUM];
-                fixed3 q_count_col[COLOR_SAVE_NUM];
-                for(int ii =0; ii < COLOR_SAVE_NUM; ii++)
-                {
-                    q_count[ii] = 0;
-                    q_count_col[ii] = fixed3(0,0,0);
-                }
-                fixed3 out_col = fixed3(0,0,0);
                 float2 texelSize = _MainTex_TexelSize;
-                for(int dx =-radian_; dx <= radian_; dx++)
-                {
-                    for(int dy =-radian_; dy<=radian_; dy++)
-                    {
-                        fixed2 uv =  i.uv + fixed2(texelSize.x*dx, texelSize.y*dy);
-                        fixed3 col = tex2D(_MainTex, uv).rgb;
-                        fixed q = (col.r + col.g + col.b)/3;
-                        int idx = q * COLOR_SAVE_NUM;
-                        q_count[idx] += 1;
-                        //fixed t = ;
-                        q_count_col[idx] = col * idx * 1.0 / COLOR_SAVE_NUM;
-                        //out_col += col;
-                    }
-                }
-                int max_index = 0;
-                int max_count = 0;
-                for(int ii =0; ii <  COLOR_SAVE_NUM; ii++)
-                {
-                    if(q_count[ii] > max_count)
-                    {
-                        max_count = q_count[ii];
-                        max_index = ii;
-                    }
-                }
-                fixed3 c = q_count_col[max_index];
-                fixed4 col = fixed4(c , 1);
-                //fixed4 col = tex2D(_MainTex, i.uv);
+                // 偏移uv
+                fixed2 offset = fixed2(0.5, 0.5);
+                fixed2 d = fixed2(i.uv.x - offset.x, i.uv.y - offset.y);
+                // 所有uv到d点的距离
+                //fixed br = min(0.8,length(_Radius * d));
+                //fixed2 uv = i.uv;
+                fixed4 color =  tex2D(_BackTex, i.uv) * 255.0;
+                int4 temp = color / _Radius;
+                fixed4 col = (temp * _Radius + _Radius*0.5)/255.0;// tex2D(_BackTex, uv) / br;
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
