@@ -61,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: bd264f023cbee12438a9a7e7bed3466c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0a61c599312ec56408bc75d544805935, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -123,6 +123,7 @@ Material:
     - _EnvironmentReflections: 1
     - _ExtrusionFactor: 0.03
     - _FaceViewProdThresh: 2.01
+    - _FallOff: 2.05
     - _FinJointNum: 1.1
     - _FinLength: 0.34
     - _FixedDroplet: 0.7
@@ -154,7 +155,7 @@ Material:
     - _Progress: 0.895
     - _Purple: 0.5
     - _QueueOffset: 0
-    - _Radius: 128
+    - _Radius: 21.82
     - _RadiusX: 1
     - _RadiusY: 0
     - _RandomDirection: 0
@@ -182,7 +183,7 @@ Material:
     - _StencilReadMask: 255
     - _StencilWriteMask: 128
     - _Surface: 0
-    - _Transparent: 1
+    - _Transparent: 0
     - _Value: 1
     - _VerticalBillBoard: 1
     - _WaveScale: 0.23
@@ -197,7 +198,7 @@ Material:
     - _BaseMove: {r: 0, g: 0, b: 0, a: 1}
     - _BubbleColor: {r: 0.8396226, g: 0.21782663, b: 0.21782663, a: 1}
     - _Center: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _Color: {r: 1, g: 0.11129004, b: 0, a: 0.16862746}
+    - _Color: {r: 0.5754717, g: 0.5121511, b: 0, a: 0.16862746}
     - _DiffuseColor: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FillColor: {r: 0.990566, g: 0.014017418, b: 0.014017418, a: 1}

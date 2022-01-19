@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6611263210814259609
+--- !u!114 &-2837874041257460494
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: hero_diane_body_0001_D
-  m_Shader: {fileID: 4800000, guid: ee64ab5dee513674d967b9dbe8a50c0b, type: 3}
+  m_Name: Refraction
+  m_Shader: {fileID: 4800000, guid: a512dcada7be8f74db93d3694ebafad7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -32,12 +32,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BackTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 17f3f0d948f646a4194e9d2902811cc4, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -49,7 +45,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 17f3f0d948f646a4194e9d2902811cc4, type: 3}
+        m_Texture: {fileID: 2800000, guid: f4ee0aa8422fd09458f93cd6bedf00c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -60,8 +56,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Ramp:
-        m_Texture: {fileID: 2800000, guid: b292c292bd2382b43960ebf89ac94103, type: 3}
+    - _RefractTex:
+        m_Texture: {fileID: 2800000, guid: b537fc3da07b1a14e816a052cb023ca8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -76,37 +72,24 @@ Material:
     - _Cutoff: 0.5
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _Factor: 0.398
-    - _FallOff: 0.1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _InSideRimForce: 3.13
-    - _InSideRimPower: 3.67
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _OutSideRimDistance: 0.02
-    - _OutSideRimForce: 5.04
-    - _OutSideRimPower: 1.59
-    - _Outline: 0.0111
     - _QueueOffset: 0
-    - _Radius: 2
     - _ReceiveShadows: 1
+    - _RefractTexTiling: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularScale: 0.0294
     - _SrcBlend: 1
     - _Surface: 0
-    - _Transparent: 0.5
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 1}
-    - _Color: {r: 0.8490566, g: 0.84505165, b: 0.84505165, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.8962264, g: 0.33397114, b: 0.33397114, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _InSideRimColor: {r: 0.8867924, g: 0.020914912, b: 0.041668043, a: 1}
-    - _OutSideRimColor: {r: 1, g: 0, b: 0.1801796, a: 1}
-    - _OutlineColor: {r: 0.09433961, g: 0.093004614, b: 0.093004614, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _Specular: {r: 0.8396226, g: 0, b: 0, a: 1}
+    - _SpeedStrength: {r: 0, g: 0, b: 0, a: 0}

@@ -7,10 +7,15 @@
         _Radius ("Radius", Range(1, 2000)) = 2
         _Transparent ("Transparent", Range(0,1)) = 0.5
         _Color  ("Color", Color) = (1,1,1,1)
+        _FallOff ("FallOf", Range(0, 5)) = 0.1
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { 
+            "Queue" = "Transparent"
+			"RenderType" = "Transparent"
+			"IgnoreProjector" = "True"
+        }
         LOD 100
 
         Pass
@@ -43,6 +48,7 @@
             sampler2D _BackTex;
             float _Radius;
             fixed4 _Color;
+            float _FallOff;
 
             v2f vert (appdata v)
             {
@@ -174,20 +180,42 @@
                 return frac(sin(dot(co.xy, fixed2(12.9898,78.233)))*43758.5453);
                 //return abs( frac( sin(co.x * 95325.328 + co.y * -48674.077) + cos(co.x * -46738.322 + co.y * 76485.077)) -.5)+.5;
             }
+            // 计算亮度
+            fixed luminance(fixed4 color) 
+            {
+			    return  0.2125 * color.r + 0.7154 * color.g + 0.0721 * color.b;
+    		}
+            // 提取图片的亮度  _LuminanceThreshold 为亮度值 低于为0
+            fixed4 TexLuminance(v2f i)
+            {
+                half _LuminanceThreshold = 0.1;
+                fixed4 c = tex2D(_MainTex, i.uv);
+			    fixed val = clamp(luminance(c) - _LuminanceThreshold, 0.0, 1.0);
+
+			    return c * val;
+            }
+
+            /* 圆角矩形的核心代码 */
+            float udRoundBox(float2 p, float2 b, float r)
+            {
+                return length(max(abs(p) - b  + r,0.0)) - r; 
+            }
 
             #define COLOR_SAVE_NUM 5
+            #define _Columns 100
+            #define _Rows 100
             fixed4 frag (v2f i) : SV_Target
             {
-                float2 texelSize = _MainTex_TexelSize;
-                // 偏移uv
-                fixed2 offset = fixed2(0.5, 0.5);
-                fixed2 d = fixed2(i.uv.x - offset.x, i.uv.y - offset.y);
-                // 所有uv到d点的距离
-                //fixed br = min(0.8,length(_Radius * d));
-                //fixed2 uv = i.uv;
-                fixed4 color =  tex2D(_BackTex, i.uv) * 255.0;
-                int4 temp = color / _Radius;
-                fixed4 col = (temp * _Radius + _Radius*0.5)/255.0;// tex2D(_BackTex, uv) / br;
+                float4 sColor = float4(_Color.rgb, 1.0);
+                float4 eColor = float4(_Color.rgb, 0.0);
+
+                float resolution = 0.5;
+                float radius = _Transparent;
+                float2 pos = (i.uv.xy - float2(0.5, 0.5))*100;
+                float b = udRoundBox(pos, float2(0.5, 0.5)*100, _Radius);
+                clip(1 - b);
+                fixed4 col = _Color;//lerp(sColor, eColor, b1);
+                
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
