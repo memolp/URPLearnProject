@@ -3,11 +3,12 @@ Shader "QING/Cartoon"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _BackTex ("Texture", 2D) = "white" {}
-        _Radius ("Radius", Range(1, 2000)) = 2
-        _Transparent ("Transparent", Range(0,1)) = 0.5
+        _Ramp ("Texture", 2D) = "white" {}
         _Color  ("Color", Color) = (1,1,1,1)
-        _FallOff ("FallOf", Range(0, 5)) = 0.1
+        _EdgeColor("Edge Color", Color) = (1,1,1,1)
+        _Specular ("Specular Color", Color) = (1,1,1,1)
+        _SpecularScale ("Specular Scale", Range(0, 10)) = 1
+        _EdgeThreshold ("Edge Threshold", Range(0, 1)) = 0.2
     }
     SubShader
     {
@@ -27,6 +28,8 @@ Shader "QING/Cartoon"
             #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
+            #include "AutoLight.cginc"
+            #include "Lighting.cginc"
 
             struct appdata
             {
@@ -46,13 +49,13 @@ Shader "QING/Cartoon"
             };
 
             sampler2D _MainTex;
+            sampler2D _Ramp;
             float4 _MainTex_ST;
-            float2 _MainTex_TexelSize;
-            float _Transparent;
-            sampler2D _BackTex;
-            float _Radius;
             fixed4 _Color;
-            float _FallOff;
+            float _SpecularScale;
+            float _EdgeThreshold;
+            fixed4 _EdgeColor;
+            fixed4 _Specular;
 
             v2f vert (appdata v)
             {
@@ -66,41 +69,36 @@ Shader "QING/Cartoon"
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
-            #define PI 3.14159265359
-            #define PI2 6.283185307
 
-            #define COLOR_SAVE_NUM 5
-            #define _Columns 100
-            #define _Rows 100
             fixed4 frag (v2f i) : SV_Target
             {
-               float3 worldPosition = normalize(i.worldPosition);
+               
                float3 worldNormal = normalize(i.worldNormal);
                float3 worldViewDir = normalize(UnityWorldSpaceViewDir(i.worldPosition));
+               float3 worldPosition = normalize(i.worldPosition);
                float3 worldLightDir = normalize(UnityWorldSpaceLightDir(i.worldPosition));
-               float colordiff = 0.1;
-               float3 abledo = tex2D(_MainTex, i.uv).rgb;
-               float3 unlitColor = abledo  ;//- colordiff;
-               float3 specularColor = abledo + colordiff;
-               float brightness = dot(worldNormal, worldLightDir);
-               float3 reflecttance = normalize(2.0 * dot(worldLightDir, worldNormal)* worldNormal - worldLightDir);
-               float cw = dot(worldViewDir, worldNormal);
-               if(cw < 0.3)
-               {
-                   return float4(0,0,0,1);
-               }
-               if(brightness  > 0)
-               {
-                   if(length(worldViewDir - reflecttance) < 0.6)
-                   {
-                       if(length(worldNormal - reflecttance) > 0.2)
-                       {
-                           return float4(specularColor, 1.0);
-                       }
-                   }
-                   return float4(unlitColor, 1.0);;
-               }
-               return float4(unlitColor, 1.0);
+               float3 worldHalfDir = normalize(worldLightDir + worldViewDir);
+
+               fixed4 c = tex2D(_MainTex, i.uv);
+               fixed3 abledo = c.rgb * _Color.rgb;
+
+               fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * abledo;
+               UNITY_LIGHT_ATTENUATION(atten, i, i.worldPosition);
+
+               fixed diff = dot(worldNormal, worldLightDir);
+               diff = (diff * 0.5 + 0.5)*atten;
+
+               fixed3 diffuse = _LightColor0.rgb * abledo * tex2D(_Ramp, float2(diff, diff)).rgb;
+               fixed spec = dot(worldNormal, worldHalfDir);
+               fixed w = fwidth(spec) * 3.0;
+               
+               fixed spvalue = smoothstep(-w,w,spec-(1-_SpecularScale)) * step(0.0001,_SpecularScale);
+               fixed3 specular = _Specular.rgb * spvalue;
+               fixed4 color = fixed4(ambient + diffuse + specular, 1.0);
+
+                // 描边功能
+               float edgeValue = step(0, dot(worldViewDir, worldNormal) - _EdgeThreshold);
+               return lerp(_EdgeColor, color, edgeValue);
             }
             ENDCG
         }

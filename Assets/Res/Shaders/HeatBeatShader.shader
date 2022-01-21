@@ -61,7 +61,7 @@
             #define PI 3.14159265359
             #define PI2 6.283185307
 
-            // 将rgb转色彩饱和度
+            // 将rgb转色彩饱和度  色调（H），饱和度（S），明度（V）。
             float3 rgb2hsv(float3 c)
             {
                 float4 K = float4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
@@ -72,7 +72,7 @@
                 float e = 1.0e-10;
                 return float3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
             }
-            // 色彩饱和度转rgb
+            // 色彩饱和度转rgb  
             float3 hsv2rgb(float3 c)
             {
                 float4 K = float4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
@@ -107,45 +107,45 @@
 
             fixed4 gaussian_blur_5v5(fixed2 uv)
             {
-                /* 错误的卷积核
-                0.0162162162 | 0.0540540541 | 0.1216216216 | 0.0540540541 | 0.0162162162
-                0.0540540541 | 0.1216216216 | 0.1945945946 | 0.1216216216 | 0.0540540541
-                0.1216216216 | 0.1945945946 | 0.2270270270 | 0.1945945946 | 0.1216216216
-                0.0540540541 | 0.1216216216 | 0.1945945946 | 0.1216216216 | 0.0540540541
-                0.0162162162 | 0.0540540541 | 0.1216216216 | 0.0540540541 | 0.0162162162
+                /* 
+                0.0125786164 | 0.0251572327 | 0.0314465409 | 0.0251572327 | 0.0125786164
+                0.0251572327 | 0.0566037736 | 0.0754716981 | 0.0566037736 | 0.0251572327
+                0.0314465409 | 0.0754716981 | 0.0943396226 | 0.0754716981 | 0.0314465409
+                0.0251572327 | 0.0566037736 | 0.0754716981 | 0.0566037736 | 0.0251572327
+                0.0125786164 | 0.0251572327 | 0.0314465409 | 0.0251572327 | 0.0125786164
                 */
                 float2 texelSize = _MainTex_TexelSize;
                 fixed4 color = fixed4(0,0,0,0);
 
-				color += tex2D(_MainTex, uv + float2(-texelSize.x*2, -texelSize.y*2)) * 0.0162162162;
-                color += tex2D(_MainTex, uv + float2(-texelSize.x*2,   -texelSize.y)) * 0.0540540541;
-				color += tex2D(_MainTex, uv + float2(-texelSize.x*2,              0)) * 0.1216216216;
-				color += tex2D(_MainTex, uv + float2(-texelSize.x*2,    texelSize.y)) * 0.0540540541;
-                color += tex2D(_MainTex, uv + float2(-texelSize.x*2,  texelSize.y*2)) * 0.0162162162;
+				color += tex2D(_MainTex, uv + float2(-texelSize.x*2, -texelSize.y*2)) * 0.0125786164;
+                color += tex2D(_MainTex, uv + float2(-texelSize.x*2,   -texelSize.y)) * 0.0251572327;
+				color += tex2D(_MainTex, uv + float2(-texelSize.x*2,              0)) * 0.0314465409;
+				color += tex2D(_MainTex, uv + float2(-texelSize.x*2,    texelSize.y)) * 0.0251572327;
+                color += tex2D(_MainTex, uv + float2(-texelSize.x*2,  texelSize.y*2)) * 0.0125786164;
 
-                color += tex2D(_MainTex, uv + float2(  -texelSize.x, -texelSize.y*2)) * 0.0540540541;
-                color += tex2D(_MainTex, uv + float2(  -texelSize.x,   -texelSize.y)) * 0.1216216216;
-				color += tex2D(_MainTex, uv + float2(  -texelSize.x,              0)) * 0.1945945946;
-				color += tex2D(_MainTex, uv + float2(  -texelSize.x,    texelSize.y)) * 0.1216216216;
-                color += tex2D(_MainTex, uv + float2(  -texelSize.x,  texelSize.y*2)) * 0.0540540541;
+                color += tex2D(_MainTex, uv + float2(  -texelSize.x, -texelSize.y*2)) * 0.0251572327;
+                color += tex2D(_MainTex, uv + float2(  -texelSize.x,   -texelSize.y)) * 0.0566037736;
+				color += tex2D(_MainTex, uv + float2(  -texelSize.x,              0)) * 0.0754716981;
+				color += tex2D(_MainTex, uv + float2(  -texelSize.x,    texelSize.y)) * 0.0566037736;
+                color += tex2D(_MainTex, uv + float2(  -texelSize.x,  texelSize.y*2)) * 0.0251572327;
 
-                color += tex2D(_MainTex, uv + float2(             0, -texelSize.y*2)) * 0.1216216216;
-                color += tex2D(_MainTex, uv + float2(             0,   -texelSize.y)) * 0.1945945946;
-				color += tex2D(_MainTex, uv + float2(             0,              0)) * 0.2270270270;
-				color += tex2D(_MainTex, uv + float2(             0,    texelSize.y)) * 0.1945945946;
-                color += tex2D(_MainTex, uv + float2(             0,  texelSize.y*2)) * 0.1216216216;
+                color += tex2D(_MainTex, uv + float2(             0, -texelSize.y*2)) * 0.0314465409;
+                color += tex2D(_MainTex, uv + float2(             0,   -texelSize.y)) * 0.0754716981;
+				color += tex2D(_MainTex, uv + float2(             0,              0)) * 0.0943396226;
+				color += tex2D(_MainTex, uv + float2(             0,    texelSize.y)) * 0.0754716981;
+                color += tex2D(_MainTex, uv + float2(             0,  texelSize.y*2)) * 0.0314465409;
 
-                color += tex2D(_MainTex, uv + float2(   texelSize.x, -texelSize.y*2)) * 0.0540540541;
-                color += tex2D(_MainTex, uv + float2(   texelSize.x,   -texelSize.y)) * 0.1216216216;
-				color += tex2D(_MainTex, uv + float2(   texelSize.x,              0)) * 0.1945945946;
-				color += tex2D(_MainTex, uv + float2(   texelSize.x,    texelSize.y)) * 0.1216216216;
-                color += tex2D(_MainTex, uv + float2(   texelSize.x,  texelSize.y*2)) * 0.0540540541;
+                color += tex2D(_MainTex, uv + float2(   texelSize.x, -texelSize.y*2)) * 0.0251572327;
+                color += tex2D(_MainTex, uv + float2(   texelSize.x,   -texelSize.y)) * 0.0566037736;
+				color += tex2D(_MainTex, uv + float2(   texelSize.x,              0)) * 0.0754716981;
+				color += tex2D(_MainTex, uv + float2(   texelSize.x,    texelSize.y)) * 0.0566037736;
+                color += tex2D(_MainTex, uv + float2(   texelSize.x,  texelSize.y*2)) * 0.0251572327;
 
-                color += tex2D(_MainTex, uv + float2( texelSize.x*2, -texelSize.y*2)) * 0.0162162162;
-                color += tex2D(_MainTex, uv + float2( texelSize.x*2,   -texelSize.y)) * 0.0540540541;
-				color += tex2D(_MainTex, uv + float2( texelSize.x*2,              0)) * 0.1216216216;
-				color += tex2D(_MainTex, uv + float2( texelSize.x*2,    texelSize.y)) * 0.0540540541;
-                color += tex2D(_MainTex, uv + float2( texelSize.x*2,  texelSize.y*2)) * 0.0162162162;
+                color += tex2D(_MainTex, uv + float2( texelSize.x*2, -texelSize.y*2)) * 0.0125786164;
+                color += tex2D(_MainTex, uv + float2( texelSize.x*2,   -texelSize.y)) * 0.0251572327;
+				color += tex2D(_MainTex, uv + float2( texelSize.x*2,              0)) * 0.0314465409;
+				color += tex2D(_MainTex, uv + float2( texelSize.x*2,    texelSize.y)) * 0.0251572327;
+                color += tex2D(_MainTex, uv + float2( texelSize.x*2,  texelSize.y*2)) * 0.0125786164;
 
                 return normalize(color);
             }
@@ -201,21 +201,32 @@
                 return length(max(abs(p) - b  + r,0.0)) - r; 
             }
 
-            #define COLOR_SAVE_NUM 5
-            #define _Columns 100
-            #define _Rows 100
+            #define COLOR_NUM 5
             fixed4 frag (v2f i) : SV_Target
             {
-                float4 sColor = float4(_Color.rgb, 1.0);
-                float4 eColor = float4(_Color.rgb, 0.0);
+                fixed3 abledo = tex2D(_MainTex, i.uv).rgb;
+                // 1. 原图高斯模糊
+                fixed4 gus = gaussian_blur_3v3(i.uv);
+                // 2. 去掉饱和度
+                fixed3 hsb = rgb2hsv(gus); //  色调（H），饱和度（S），明度（V）。
+                hsb.g = 0;
+                fixed3 rgb = hsv2rgb(hsb);
+                // 3. 反转
+                fixed invert_ = gus.g * 0.59 + gus.r * 0.3 + gus.b * 0.11;
+                fixed r = 1 - invert_;
+                fixed g = 1 - invert_;
+                fixed b = 1 - invert_;
 
-                float resolution = 0.5;
-                float radius = _Transparent;
-                float2 pos = (i.uv.xy - float2(0.5, 0.5))*100;
-                float b = udRoundBox(pos, float2(0.5, 0.5)*100, _Radius);
-                clip(1 - b);
-                fixed4 col = _Color;//lerp(sColor, eColor, b1);
-                
+                // fixed Rate = 1.004;
+                // fixed r = ( 1 - rgb.r * Rate) / Rate;
+                // fixed g = ( 1 - rgb.g * Rate) / Rate;
+                // fixed b = ( 1 - rgb.b * Rate) / Rate;
+
+                fixed3 details = fixed3(r,g,b);
+                // 4. 线性光 + 不透明度为65%
+                fixed3 c = details * _Transparent + 2 * abledo - 1;
+
+                fixed4 col = fixed4(c, 1.0);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;

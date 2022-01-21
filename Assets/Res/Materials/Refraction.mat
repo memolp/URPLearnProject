@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Refraction
-  m_Shader: {fileID: 4800000, guid: a512dcada7be8f74db93d3694ebafad7, type: 3}
+  m_Shader: {fileID: 4800000, guid: e572e55afd45baf42ae83154becc233e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -64,6 +64,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - reflectionTex:
+        m_Texture: {fileID: 8900000, guid: 6e998e53d0a82bb45928cd08a0fcfff3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
@@ -87,9 +91,13 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _mirrorRefraction: 1
+    - _refractionRatio: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.8962264, g: 0.33397114, b: 0.33397114, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HightColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SpeedStrength: {r: 0, g: 0, b: 0, a: 0}
+    - _WarmColor: {r: 1, g: 1, b: 1, a: 1}

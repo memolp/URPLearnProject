@@ -155,7 +155,7 @@ Material:
     - _Progress: 0.895
     - _Purple: 0.5
     - _QueueOffset: 0
-    - _Radius: 21.82
+    - _Radius: 1
     - _RadiusX: 1
     - _RadiusY: 0
     - _RandomDirection: 0
@@ -183,7 +183,7 @@ Material:
     - _StencilReadMask: 255
     - _StencilWriteMask: 128
     - _Surface: 0
-    - _Transparent: 0
+    - _Transparent: 0.65
     - _Value: 1
     - _VerticalBillBoard: 1
     - _WaveScale: 0.23
