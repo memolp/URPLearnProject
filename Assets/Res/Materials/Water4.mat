@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2173081906007328107
+--- !u!114 &-346670811348786255
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,9 +20,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LUTColorGrading
-  m_Shader: {fileID: 4800000, guid: 2bd41ba4d98cd1c498656d4d81ab8b4a, type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
+  m_Name: Water4
+  m_Shader: {fileID: 4800000, guid: daf7a899eb6f2c54e9d2c87a4e599101, type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -40,20 +40,36 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DisplacementGuide:
+        m_Texture: {fileID: 2800000, guid: f845954e0755451459b7edd41d9e1ad9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _LUT:
-        m_Texture: {fileID: 2800000, guid: f78aeda0819fcd84ba41fbbeba791460, type: 3}
+    - _FoamTexture:
+        m_Texture: {fileID: 2800000, guid: 1dfec1da4d704a6408803ea989e02db1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GradientMap:
+        m_Texture: {fileID: 2800000, guid: 66a18b89772c38d4a8932d5af99ab752, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4c1a4935de621f94fa9cd5550c10e21c, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTextureA:
+        m_Texture: {fileID: 2800000, guid: 2a71265ae30f8f0469f51546f3076031, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTextureB:
+        m_Texture: {fileID: 2800000, guid: 1059c77b9d98a8d4699924dd45dd523a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -64,11 +80,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _WaterNormal:
+        m_Texture: {fileID: 2800000, guid: 11a20406e58d0464689189f99d19bdbb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
-    - _Contribution: 1
     - _Cull: 2
     - _Cutoff: 0.5
     - _DstBlend: 0
@@ -76,19 +95,36 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _MaxTessellationDistance: 100
     - _Metallic: 0
+    - _MinOffset: 0.2
+    - _NormalScale: 1
     - _OcclusionStrength: 1
+    - _OffsetAmount: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _ShoreColorThreshold: 0
+    - _ShoreIntersectionThreshold: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _Tessellation: 1
+    - _TransparencyIntersectionThresholdMax: 0
+    - _TransparencyIntersectionThresholdMin: 0
+    - _VectorLength: 0.1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DisplacementProperties: {r: 0, g: 0, b: 0, a: 0}
+    - _Emission: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FoamIntersectionProperties: {r: 0, g: 0, b: 0, a: 0}
+    - _FoamProperties: {r: 0, g: 0, b: 0, a: 0}
+    - _NoiseAProperties: {r: 0, g: 0, b: 1, a: 1}
+    - _NoiseBProperties: {r: 0, g: 0, b: 1, a: 1}
+    - _ShoreColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}

@@ -20,6 +20,7 @@
             #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
+            #include "Lighting.cginc"
 
             struct appdata
             {
@@ -62,7 +63,7 @@
                 // 将光从模型空间转换到切线空间
                 o.lightDir = normalize(mul(rotation, ObjSpaceLightDir(v.vertex)).xyz); //ObjSpaceLightDir 是转模型空间
                 // 将模型顶点到摄像机方向 转换到 切线空间
-                o.viewDir = normal(mul(rotation, ObjSpaceViewDir(v.vertex)).xyz);
+                o.viewDir = normalize(mul(rotation, ObjSpaceViewDir(v.vertex)).xyz);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -73,8 +74,8 @@
                 float2 uv1 = _Time.y * float2(-0.03, 0) + i.uv;
                 float2 uv2 = _Time.y * float2(0.04, 0.04) + i.uv;
                 // 采样水面法线贴图，并进行凹凸缩放
-                float3 noraml_1 = UnpackScaleNormal(tex2d(_WaterNormal, uv1), _NormalScale);
-                float3 noraml_2 = UnpackScaleNormal(tex2d(_WaterNormal, uv2), _NormalScale);
+                float3 noraml_1 = UnpackScaleNormal(tex2D(_WaterNormal, uv1), _NormalScale);
+                float3 noraml_2 = UnpackScaleNormal(tex2D(_WaterNormal, uv2), _NormalScale);
                 // 将两次的法线进行混合
                 half3 blend_normal = BlendNormals(noraml_1, noraml_2);
 
@@ -83,7 +84,7 @@
                 depth = LinearEyeDepth(depth); // 视野线性深度值
                 float depthGrap = saturate(depth - i.screenPos.w);
                 // 这样转换后获得深度插值 - 这里会反过来，越小表示深度越深。
-                float depthFade = saturate(pow(depthGrap + _WaterDepth), _WaterFallOff);
+                float depthFade = saturate(pow(depthGrap + _WaterDepth, _WaterFallOff));
                 // 深度越小的地方用_DeepColor，越大的地方用_ShadiwColor;
                 fixed4 color = lerp(_DeepColor, _ShadowColor, depthFade);
 

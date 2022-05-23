@@ -52,7 +52,8 @@ Shader "QING/LUTColorGrading"
             fixed4 frag (v2f i) : SV_Target
             {
                 float maxColor = COLORS - 1.0;
-                //这种色调映射技术应用于 LDR 图像而不是 HDR 
+                // 我们将颜色从 0 映射到 1，所以如果我们的值大于 1，我们会得到一些令人讨厌的伪影
+                // 这种色调映射技术应用于 LDR 图像而不是 HDR 的原因，因为它必须减少高范围值。
                 fixed4 col = saturate(tex2D(_MainTex, i.uv)); //[0, 1]
                 // X 和 Y 轴 LUT 纹理像素大小的一半
                 float halfColX = 0.5 / _LUT_TexelSize.z;
@@ -60,6 +61,7 @@ Shader "QING/LUTColorGrading"
                 float threshold = maxColor / COLORS;
                 //  LUT 采样的偏移量
                 // 红色通道的偏移量等于：半个纹理像素+通道值*阈值/颜色
+                // (0.5 + col.r * 31) / 1024 = 当_LUT_TexelSize.z=1024；
                 float xOffset = halfColX + col.r * threshold / COLORS;
                 // 绿色通道
                 float yOffset = halfColY + col.g * threshold;
