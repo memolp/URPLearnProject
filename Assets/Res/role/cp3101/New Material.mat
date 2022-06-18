@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6527285336260458486
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: New Material
+  m_Shader: {fileID: 4800000, guid: 6012d388c62db4949a8cb2957fb53185, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightingRamp:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 3c66c0bddb016ba44818495a7dd83bdc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PlayerTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Ramp:
+        m_Texture: {fileID: 2800000, guid: 5bc9b60eae6d53a4bac7dcb4a23c9236, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - reflectionTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphaClip: 0
+    - _Antialiasing: 5
+    - _Blend: 0
+    - _BlurDistance: 0
+    - _BumpScale: 1
+    - _ChromAberrAmountX: 0
+    - _ChromAberrAmountY: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DropletDensity: 1.85
+    - _DropletSize: 0.4
+    - _DstBlend: 0
+    - _EdgeThreshold: 0
+    - _EnvironmentReflections: 1
+    - _Factor: 0
+    - _Fill: 0.8
+    - _FixedDroplet: 0.7
+    - _Frequency: 20
+    - _FrequencyR: 20
+    - _Fresnel: 0.5
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
+    - _ID: 1
+    - _InSideRimForce: 0
+    - _InSideRimPower: 0.74
+    - _LeftStripesAmount: 1
+    - _LeftStripesFill: 0.7
+    - _Metallic: 0
+    - _MoreRainAmount: 0.06
+    - _OcclusionStrength: 1
+    - _OutSideRimDistance: 0.0001
+    - _OutSideRimForce: 3
+    - _OutSideRimPower: 2.22
+    - _Outline: 0
+    - _OutlineSize: 0.01
+    - _QueueOffset: 0
+    - _Radius: 7
+    - _ReceiveShadows: 1
+    - _RightStripesAmount: 1
+    - _RightStripesFill: 0.7
+    - _RimIntensity: 0.32
+    - _Smoothness: 0.5
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SpecularPower: 1.6
+    - _SpecularScale: 0
+    - _Speed: 1
+    - _SrcBlend: 1
+    - _Surface: 0
+    - _VerticalBillBoard: 1
+    - _WavyDisplFreq: 10
+    - _WorkflowMode: 1
+    - _ZWrite: 1
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.58406013, g: 0.95476615, b: 0.990566, a: 1}
+    - _DisplacementAmount: {r: 0, g: 0, b: 0, a: 0}
+    - _EdgeColor: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HightColor: {r: 1, g: 0.3820755, b: 0.3820755, a: 1}
+    - _InSideRimColor: {r: 0.8301887, g: 0, b: 0, a: 1}
+    - _LightDirection: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _OutSideRimColor: {r: 0.103773594, g: 0.02104842, b: 0.02104842, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 0.08018869, g: 1, b: 0.2946245, a: 1}
+    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _Specular: {r: 1, g: 1, b: 1, a: 1}
+    - _WarmColor: {r: 1, g: 0.11792451, b: 0.11792451, a: 1}
