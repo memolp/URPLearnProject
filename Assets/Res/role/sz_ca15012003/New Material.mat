@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: New Material
-  m_Shader: {fileID: 4800000, guid: 447ad89a3668f504fa507b4f9e24f2c0, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8125353d9228446429b0bf85a01e7841, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -41,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 5bc9b60eae6d53a4bac7dcb4a23c9236, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DissolveGuide:
@@ -80,6 +80,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Ramp:
+        m_Texture: {fileID: 2800000, guid: a39c20eb01e15b24baa717664b66baa2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _RefractTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -102,17 +106,19 @@ Material:
     - _DistortionAnmSpeed: 1
     - _DistortionFrequency: 1
     - _DstBlend: 0
+    - _EdgeThreshold: 0
     - _EnvironmentReflections: 1
     - _ExtrusionFactor: 0
     - _FaceViewProdThresh: 0.1
+    - _Factor: 0
     - _FallOffU: 0
     - _FallOffV: 0
     - _FinJointNum: 0.1
     - _FinLength: 0.1
     - _Force: 0.2
-    - _Fresnel: 0.37
+    - _Fresnel: 0.12
     - _GlossMapScale: 0
-    - _Glossiness: 6.21
+    - _Glossiness: 1
     - _GlossyReflections: 0
     - _Hit: 0
     - _ID: 1
@@ -124,19 +130,23 @@ Material:
     - _NoiseStrength: 1
     - _OcclusionStrength: 1
     - _Offset: 0
+    - _Outline: 0
     - _OutlineSize: 2.31
     - _QueueOffset: 0
     - _Radius: 4
     - _RandomDirection: 0.1
     - _ReceiveShadows: 1
     - _RefractTexTiling: 1
+    - _RimPower: 5.39
     - _SatCount: 0
     - _ShadowDilation: 1.2
     - _ShadowMin: 0.11
+    - _ShadowSmoothness: 0.76
     - _ShadowStep: 0.2
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SpecularScale: 0.02
     - _SrcBlend: 1
     - _Strength: 0.2
     - _Surface: 0
@@ -152,13 +162,17 @@ Material:
     - _BaseMove: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Direction: {r: 0, g: 0, b: 0, a: 0}
+    - _EdgeColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FrontColor: {r: 1, g: 1, b: 1, a: 1}
     - _FurColor: {r: 1, g: 1, b: 1, a: 1}
     - _HitTint: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 1.2264152, g: 0.12148452, b: 0.8458281, a: 1}
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SpecTint: {r: 1, g: 1, b: 1, a: 1}
+    - _Specular: {r: 1, g: 1, b: 1, a: 1}
     - _SpeedStrength: {r: 1, g: 1, b: 1, a: 1}
     - _WindFreq: {r: 1, g: 1, b: 1, a: 1}
     - _WindMove: {r: 1, g: 1, b: 1, a: 1}
