@@ -68,7 +68,7 @@ Material:
     - _Cutoff: 0.5
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _FillAmount: 0.3
+    - _FillAmount: -3.2
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -76,7 +76,7 @@ Material:
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Rim: 0.03
+    - _Rim: 0.0086
     - _RimPower: 0.5
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0

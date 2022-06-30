@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TestMat
-  m_Shader: {fileID: 4800000, guid: b8152653dc4c0c34dad08b11607724fa, type: 3}
+  m_Shader: {fileID: 4800000, guid: bacb08e017c05534a8bea3b27147d4c4, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -56,12 +56,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _FlowMap:
+        m_Texture: {fileID: 2800000, guid: b7d298d3ffc053b4ea9dbe122acc93b5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _HairTex:
         m_Texture: {fileID: 2800000, guid: cc59f2c7f3a85a24ab42e1ce9868263f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4c1a4935de621f94fa9cd5550c10e21c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4b48f8552a42dad4ea0f5ef69978cf51, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -78,6 +82,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 2800000, guid: f9ac6a45b89a76248a986a951e1b7e0f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RampTex:
+        m_Texture: {fileID: 2800000, guid: 82d392af71281d8429050e9479d63b92, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ReflectiveColor:
@@ -151,6 +159,7 @@ Material:
     - _OcclusionStrength: 0.383
     - _Orange: -0.5
     - _OuterRadius: 0.5
+    - _Outline: 0.00003
     - _Pow_S: 1.23
     - _PrimaryShift: 0
     - _Progress: 0.895
@@ -176,7 +185,7 @@ Material:
     - _SpecularPower: 0.9
     - _SpecularScale: 0.33
     - _SpecularWidth: 0.24
-    - _Speed: 0
+    - _Speed: 0.96
     - _SrcBlend: 1
     - _Stencil: 0
     - _StencilComp: 4
