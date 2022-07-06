@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: New Material
-  m_Shader: {fileID: 4800000, guid: 8125353d9228446429b0bf85a01e7841, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0cfd64276af9dd948b4c56a2e5a441b7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -53,6 +53,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -98,7 +102,7 @@ Material:
     - _FrequencyR: 20
     - _Fresnel: 0.5
     - _GlossMapScale: 0
-    - _Glossiness: 1
+    - _Glossiness: 32
     - _GlossyReflections: 0
     - _ID: 1
     - _InSideRimForce: 0
@@ -118,8 +122,9 @@ Material:
     - _ReceiveShadows: 1
     - _RightStripesAmount: 1
     - _RightStripesFill: 0.7
+    - _RimAmount: 0.716
     - _RimIntensity: 0.32
-    - _RimPower: 3.56
+    - _RimPower: 0.1
     - _ShadowSmoothness: 0.78
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -134,6 +139,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - _AmbientColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DisplacementAmount: {r: 0, g: 0, b: 0, a: 0}
@@ -148,4 +154,5 @@ Material:
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _Specular: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecularColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
     - _WarmColor: {r: 1, g: 0.11792451, b: 0.11792451, a: 1}

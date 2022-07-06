@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 222
-  m_Shader: {fileID: 4800000, guid: 0cfd64276af9dd948b4c56a2e5a441b7, type: 3}
+  m_Name: mode_004
+  m_Shader: {fileID: 4800000, guid: c2a2d1f9713ce154a89599e115deb584, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -32,7 +32,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 4be75ab038f2b6645b233841ecdad4d6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Metallic:
+        m_Texture: {fileID: 2800000, guid: 883ae94528a803c4295521ccaa2f6ccb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -40,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d5212bce7f2d40c40b2896a4a0869d1c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -48,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
-        m_Texture: {fileID: 2800000, guid: a39c20eb01e15b24baa717664b66baa2, type: 3}
+        m_Texture: {fileID: 2800000, guid: b292c292bd2382b43960ebf89ac94103, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -61,34 +65,44 @@ Material:
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
+    - _Diffuse: 0.1
     - _DstBlend: 0
+    - _EdgeThreshold: 0.313
     - _EnvironmentReflections: 1
+    - _Factor: 0
     - _GlossMapScale: 0
-    - _Glossiness: 32
+    - _Glossiness: 64
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _NormalScale: 1
     - _OcclusionStrength: 1
+    - _Outline: 0.002
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimPower: 1
-    - _ShadowSmoothness: 0.62
+    - _Rim: 0.01
+    - _RimAmount: 0.716
+    - _RimPower: 0.1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
+    - _Specular: 0.08
     - _SpecularHighlights: 1
+    - _SpecularScale: 0.0062
     - _SrcBlend: 1
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _AmbientColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
+    - _AmbientColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.11792451, g: 0.82569104, b: 1, a: 1}
+    - _Color: {r: 1, g: 0.9198113, b: 0.9198113, a: 1}
+    - _EdgeColor: {r: 0.9433962, g: 0.86774653, b: 0.86774653, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _RimColor: {r: 0.13683695, g: 0.38111234, b: 0.7075472, a: 1}
-    - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _Specular: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
---- !u!114 &3646721617839202101
+--- !u!114 &2285780252258508492
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
